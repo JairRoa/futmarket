@@ -66,6 +66,7 @@ function delete_object(e){
         title = "Restaurar ítem";
         text = "¿Seguro que deseas restaurar este ítem?";
         icon = "info";
+
     }
 
     swal({

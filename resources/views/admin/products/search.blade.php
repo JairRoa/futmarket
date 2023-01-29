@@ -85,22 +85,14 @@
                                 <a href=" {{ url('/admin/products/' .$p->id.'/edit')}}" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a>
                                 @endif
                                 @if(kvfj(Auth::user()->permissions, 'product_delete'))
-                                    @if(is_null($p->deleted_at))
-                                        <a href="#" data-path="admin/products" data-action="delete" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn-deleted"><i class="fa-solid fa-trash-can"></i></a>
-                                    @else
-                                    <a href="{{ url('/admin/produscts/' .$p->id. '/restore') }}" data-path="admin/products" data-action="restore" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Restaurar" class="btn-deleted"><i class="fa-solid fa-trash-can-arrow-up"></i></a>
-                                    @endif
+                                <a href=" {{ url('/admin/products/' .$p->id.'/delete')}}" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa-solid fa-trash-can"></i></a>
                                 @endif
                             </div>
                         </td>
                     </tr>
 
                     @endforeach
-                    <div class="d-flex justify-content-end">
-                        <tr>
-                            <td>{!! $products->links() !!} </td>
-                        </tr>
-                    </div>
+
                 </tbody>
             </table>
         </div>

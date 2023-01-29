@@ -15,6 +15,9 @@
                 <input type="checkbox" value="true" name="product_edit" @if(kvfj($u->permissions, 'product_edit')) checked @endif> <label for="product_edit"> Editar productos</label>
             </div>
             <div class="form-check">
+                <input type="checkbox" value="true" name="product_search" @if(kvfj($u->permissions, 'product_search')) checked @endif> <label for="product_search"> Buscar productos</label>
+            </div>
+            <div class="form-check">
                 <input type="checkbox" value="true" name="product_delete" @if(kvfj($u->permissions, 'product_delete')) checked @endif> <label for="product_delete"> Eliminar productos</label>
             </div>
             <div class="form-check">

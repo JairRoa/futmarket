@@ -3,6 +3,19 @@ var route = document.getElementsByName('routeName')[0].getAttribute('content');
 
 
 document.addEventListener('DOMContentLoaded', function(){
+    var btn_search = document.getElementById('btn_search');
+    var form_search = document.getElementById('form_search');
+    if(btn_search){
+        btn_search.addEventListener('click', function (e){
+            e.preventDefault();
+            if(form_search.style.display === 'block'){
+                form_search.style.display = 'none';
+            }else {
+                form_search.style.display = 'block';
+            }
+        });
+    }
+
     if(route == "product_edit"){
         var btn_product_file_image = document.getElementById('btn_products_file_image');
         var product_file_image = document.getElementById('product_file_image');

@@ -17,8 +17,22 @@ class ProductController extends Controller
         $this->middleware('user.permissions');
         $this->middleware('isadmin');
     }
-    public function getHome(){
-        $products = Products::with(['cat'])->orderBy('id', 'desc')->paginate(10);
+    public function getHome($status){
+        switch($status){
+            case '0':
+                $products = Products::with(['cat'])->where('status' , '0')->orderBy('id', 'desc')->paginate(10);
+                break;
+            case '1':
+                $products = Products::with(['cat'])->where('status' , '1')->orderBy('id', 'desc')->paginate(10);
+                break;
+            case 'all':
+                $products = Products::with(['cat'])->orderBy('id', 'desc')->paginate(10);
+                break;
+            case 'trash':
+                $products = Products::with(['cat'])->onlyTrashed()->orderBy('id', 'desc')->paginate(10);
+                break;
+        }
+
         $data = ['products' => $products];
         return view('admin.products.home', $data);
     }
@@ -215,5 +229,35 @@ class ProductController extends Controller
                 return back()->with('message', 'La imagen ha sido borrada')->with('typealert', 'success');
             endif;
         }
+    }
+
+    public function postProductSearch(Request $request){
+        $rules = [
+            'search' => 'required'
+        ];
+
+        $messages = [
+            'search.required' => ' Por favor introduzca una consulta'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)
+            ->with('message', ' se ha producido un error')
+            ->with('typealert', 'danger')->withInput();
+        else:
+            switch ($request->input('filter')):
+                case '0':
+                    $products = Products::with(['cat'])->where('name', 'LIKE', '%' .$request->input('search').'%')->where('status' , '0')->orderBy('id', 'desc')->get();
+                    break;
+
+                    case '1':
+                    $products = Products::with(['cat'])->where('code', $request->input('search'))->orderBy('id', 'desc')->get();
+                    break;
+            endswitch;
+
+            $data = ['products' => $products];
+            return view('admin.products.search', $data);
+
+        endif;
     }
 }

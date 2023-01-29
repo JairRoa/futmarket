@@ -92,11 +92,7 @@
                     </tr>
 
                     @endforeach
-                    <div class="d-flex justify-content-end">
-                        <tr>
-                            <td>{!! $products->links() !!} </td>
-                        </tr>
-                    </div>
+
                 </tbody>
             </table>
         </div>

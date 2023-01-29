@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
     Route::post('/users/{id}/permissions', 'App\Http\Controllers\Admin\UserController@postUserPermissions')->name('user_permissions');
 
     //Module Products
-    Route::get('/products', 'App\Http\Controllers\Admin\ProductController@getHome')->name('products');
+    Route::get('/products/{status}', 'App\Http\Controllers\Admin\ProductController@getHome')->name('products');
     Route::get('/products/add', 'App\Http\Controllers\Admin\ProductController@getProductAdd')->name('product_add');
     Route::post('/products/add', 'App\Http\Controllers\Admin\ProductController@postProductAdd')->name('product_add');
     Route::get('/products/{id}/edit', 'App\Http\Controllers\Admin\ProductController@getProductEdit')->name('product_edit');
     Route::post('/products/{id}/edit', 'App\Http\Controllers\Admin\ProductController@postProductEdit')->name('product_edit');
+    Route::post('/products/search', 'App\Http\Controllers\Admin\ProductController@postProductSearch')->name('product_search');
     Route::post('/products/{id}/gallery/add', 'App\Http\Controllers\Admin\ProductController@postProductGalleryAdd')->name('product_gallery_add');
     Route::get('/products/{id}/gallery/{gid}/delete', 'App\Http\Controllers\Admin\ProductController@getProductGalleryDelete')->name('product_gallery_delete');
 

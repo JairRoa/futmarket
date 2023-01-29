@@ -26,7 +26,7 @@
 
             @if(kvfj(Auth::user()->permissions, 'products'))
             <li>
-                <a href="{{ url ('/admin/products')}}" class="lk-products lk-product_add lk-product_edit lk-product_gallery_add"><i class="fa-solid fa-carrot"></i> Productos</a>
+                <a href="{{ url ('/admin/products/1')}}" class="lk-products lk-product_add lk-product_search lk-product_edit lk-product_gallery_add"><i class="fa-solid fa-carrot"></i> Productos</a>
             </li>
             @endif
 

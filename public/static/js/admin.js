@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     route_active = document.getElementsByClassName('lk-'+route)[0].classList.add('active');
 
+    btn_deleted = document.getElementsByClassName('btn-deleted');
+    for (i = 0; i < btn_deleted.length; i++) {
+        btn_deleted[i].addEventListener('click', delete_object);
+    }
+
 });
 
 $(document).ready(function(){
@@ -44,3 +49,36 @@ function editor_init(field) {
         ]
     });
 }
+
+function delete_object(e){
+    e.preventDefault();
+    var object = this.getAttribute('data-object');
+    var action = this.getAttribute('data-action');
+    var path = this.getAttribute('data-path');
+    var url = base + '/' + path + '/' + object + '/' + action;
+    var title, text, icon;
+    if(action == "delete"){
+        title = "Enviar a papelera";
+        text = "¿Seguro que deseas enviar este ítem a la papelera?";
+        icon = "warning";
+    }
+    if(action == "restore"){
+        title = "Restaurar ítem";
+        text = "¿Seguro que deseas restaurar este ítem?";
+        icon = "info";
+    }
+
+    swal({
+        title: title,
+        text: text,
+        icon: icon,
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location.href = url;
+        }
+      });
+}
+
